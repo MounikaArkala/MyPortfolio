@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://code.jquery.com/jquery-3.2.1.js"
+         integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+         crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="css/style.css">
+   </head>
+   <body>
+      <div id="container" >
+         <!--Menu Button to toggle the content on UI -->
+         <button type="button" class="btn btn-lg btn-info collapsed  btn-warning" data-toggle="collapse" data-target="#target">
+         <span class="glyphicon glyphicon-th-list"></span> Menu</button>    
+         <!--Button to reload the page and show all listings-->
+         <input id="show-listings" type="button" value="Show All Listings" class ="btn btn-warning"  data-bind="click:reload" >
+         <div  id="target" class="collapse">
+            <div class="wrapper">
+               <h1>Points of Interest in Austin</h1>
+               <hr>
+               <span class="text">Pick a location </span>
+               <table>
+                  <tr>
+                     <th>
+                        <!--text input to enter deired location of places to visit-->
+                        <div class="inner-addon left-addon">
+                           <i class="glyphicon glyphicon-map-marker"></i>
+                           <input type="text" class="color" id="destination-input"  list="options" placeholder="e.g. Zilker Botanical Garden">
+                        </div>
+                     </th>
+                     <!--Button to filter the options-->
+                     <th>
+                        <button id ="filter" type="button" class ="btn btn-warning"  data-bind="click:filter"><span class="glyphicon glyphicon-filter"></span>Filter</button>
+                     </th>
+                  </tr>
+               </table>
+               <datalist id="options">
+               </datalist>
+               <div id="list-view" class="list-group-item list-group-item-info" >
+               </div>
+               <hr>
+               <!--Button for drawing tool-->
+               <div>
+                  <span class="text"> Draw a shape to search within it for places to visit!!</span>
+                  <button  type="button" id="toggle-drawing"  class ="btn btn-warning" data-bind="click:drawing"><span class="glyphicon glyphicon-pencil"></span>Drawing Tools</button>
+               </div>
+               <hr>
+               <div>
+                  <span class="text"> Select Mode of Transport and enter the Destination address to view the routes between markers and destination address!! </span> <br>
+                  <span class="text">Mode of Transport: </span>
+                <!--options for mode of travel-->
+                  <select id="mode" class="color" data-bind="value: selectedValue" >
+                     <option value="DRIVING">drive</option>
+                     <option value="WALKING">walk</option>
+                     <option value="BICYCLING">bike</option>
+                     <option value="TRANSIT">transit ride</option>
+                  </select>
+                  <table>
+                     <tr>
+                        <th>
+                           <span class="text">Destination Address: </span>
+                        </th>
+                        <th>
+                        <!--text box to enter destination address-->
+                           <div class="inner-addon left-addon">
+                              <i class="glyphicon glyphicon-map-marker"></i>
+                              <input id="search-text" class="color" type="text" placeholder="Ex: Austin Downtown">
+                           </div>
+                        </th>
+                        <!--button to view distance Information-->
+                        <th>
+                           <input id="search" class ="btn btn-warning" type="button" data-bind="click: distanceInfo, enable: selectedValue" value="Go">
+                        </th>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="map"></div>
+      <script type="text/javascript" src="js/libs/knockout-3.3.0.js"></script>
+      <script async type="text/javascript" src="js/script.js"></script>
+      <script async defer
+         src="https://maps.googleapis.com/maps/api/js?libraries=places, geometry,drawing&key=AIzaSyBJIcCIIQk_bGF-WjeJ5UMkVyGbWEu3qok&v=3&callback=initMap" async defer onerror="mapError()"></script>
+   </body>
+</html>
